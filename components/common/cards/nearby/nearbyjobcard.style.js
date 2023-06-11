@@ -30,18 +30,30 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: SIZES.medium,
   },
-  jobName: {
+  siswaName: {
     fontSize: SIZES.medium,
     fontFamily: "DMBold",
     color: COLORS.primary,
   },
-  jobType: {
+  siswaNis: {
     fontSize: SIZES.small + 2,
     fontFamily: "DMRegular",
     color: COLORS.gray,
     marginTop: 3,
     textTransform: "capitalize",
   },
+  siswaStatus: (siswa) => ({
+    fontSize: SIZES.small + 2,
+    fontFamily: "DMRegular",
+    color: siswa?.status === "DITERIMA" ? COLORS.primary : COLORS.red,
+    backgroundColor: siswa?.status === "DITERIMA" ? "#D4F5E3" : "#FDEDEC",
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 10,
+    width: 140,
+    marginTop: 3,
+    textTransform: "capitalize",
+  }),
 });
 
 export default styles;

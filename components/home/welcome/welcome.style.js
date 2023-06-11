@@ -11,6 +11,21 @@ const styles = StyleSheet.create({
     fontSize: SIZES.large,
     color: COLORS.secondary,
   },
+  button: {
+    backgroundColor: COLORS.primary,
+    borderRadius: 10,
+    padding: 10,
+    elevation: 2,
+    width: 200,
+    marginTop: 10,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  buttonText: {
+    color: COLORS.white,
+    fontSize: 16,
+    fontWeight: "bold"
+  },
   welcomeMessage: {
     fontFamily: FONT.bold,
     fontSize: SIZES.xLarge,

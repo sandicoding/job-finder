@@ -9,18 +9,15 @@ import useFetch from "../../../hook/useFetch";
 
 const Nearbyjobs = () => {
   const router = useRouter();
-  const { data, isLoading, error } = useFetch("search", {
-    query: "React Native developer",
-    num_pages: "1",
-  });
-
+  const { data, isLoading, error } = useFetch("registrations",{});
+  
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Nearby jobs</Text>
-        <TouchableOpacity>
+        <Text style={styles.headerTitle}>Daftar List Siswa</Text>
+        {/* <TouchableOpacity>
           <Text style={styles.headerBtn}>Show all</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
 
       <View style={styles.cardsContainer}>
@@ -31,9 +28,9 @@ const Nearbyjobs = () => {
         ) : (
           data?.map((job) => (
             <NearbyJobCard
-              job={job}
+              siswa={job}
               key={`nearby-job-${job.job_id}`}
-              handleNavigate={() => router.push(`/job-details/${job.job_id}`)}
+              handleNavigate={() => router.push(`/register`)}
             />
           ))
         )}

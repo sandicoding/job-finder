@@ -21,8 +21,16 @@ const Welcome = ({ searchTerm, setSearchTerm, handleClick }) => {
   return (
     <View>
       <View style={styles.container}>
-        <Text style={styles.userName}>Hello Adrian</Text>
-        <Text style={styles.welcomeMessage}>Find your perfect job</Text>
+        <Text style={styles.userName}>Hallo Selamat Datang</Text>
+        <Text style={styles.userName}>di SD Kamuning 1 </Text>
+        <Text style={styles.welcomeMessage}>Ayo Kita Belajar Bersama</Text>
+        <TouchableOpacity onPress={() => router.push('/register')}>
+          <View style={styles.button}>
+            <Text style={styles.buttonText}>
+              Daftar Sekarang
+            </Text>
+          </View>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.searchContainer}>
@@ -31,7 +39,7 @@ const Welcome = ({ searchTerm, setSearchTerm, handleClick }) => {
             style={styles.searchInput}
             value={searchTerm}
             onChangeText={(text) => setSearchTerm(text)}
-            placeholder='What are you looking for?'
+            placeholder='Cari siswa yang terdaftar?'
           />
         </View>
 
@@ -44,7 +52,7 @@ const Welcome = ({ searchTerm, setSearchTerm, handleClick }) => {
         </TouchableOpacity>
       </View>
 
-      <View style={styles.tabsContainer}>
+      {/* <View style={styles.tabsContainer}>
         <FlatList
           data={jobTypes}
           renderItem={({ item }) => (
@@ -62,7 +70,7 @@ const Welcome = ({ searchTerm, setSearchTerm, handleClick }) => {
           contentContainerStyle={{ columnGap: SIZES.small }}
           horizontal
         />
-      </View>
+      </View> */}
     </View>
   );
 };

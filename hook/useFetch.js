@@ -8,11 +8,11 @@ const useFetch = (endpoint, query) => {
 
   const options = {
     method: "GET",
-    url: `https://jsearch.p.rapidapi.com/${endpoint}`,
-    headers: {
-      "X-RapidAPI-Key": '4e4d41f674msha7f0eb382392ffap1027dfjsn216adbe64ee5',
-      "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
-    },
+    url: `http://192.168.1.17:81/ppdb-v4/public/api/${endpoint}`,
+    // headers: {
+    //   "X-RapidAPI-Key": '4e4d41f674msha7f0eb382392ffap1027dfjsn216adbe64ee5',
+    //   "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
+    // },
     params: { ...query },
   };
 

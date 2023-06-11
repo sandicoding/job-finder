@@ -3,15 +3,15 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import styles from "./nearbyjobcard.style";
 import { checkImageURL } from "../../../../utils";
 
-const NearbyJobCard = ({ job, handleNavigate }) => {
+const NearbyJobCard = ({ siswa, handleNavigate }) => {
   return (
     <TouchableOpacity style={styles.container} onPress={handleNavigate}>
       <TouchableOpacity style={styles.logoContainer}>
         <Image
           source={{
-            uri: checkImageURL(job.employer_logo)
-              ? job.employer_logo
-              : "https://t4.ftcdn.net/jpg/05/05/61/73/360_F_505617309_NN1CW7diNmGXJfMicpY9eXHKV4sqzO5H.jpg",
+            uri: checkImageURL(siswa?.employer_logo)
+              ? siswa?.employer_logo
+              : "https://cdn-icons-png.flaticon.com/512/2784/2784403.png",
           }}
           resizeMode='contain'
           style={styles.logImage}
@@ -19,11 +19,13 @@ const NearbyJobCard = ({ job, handleNavigate }) => {
       </TouchableOpacity>
 
       <View style={styles.textContainer}>
-        <Text style={styles.jobName} numberOfLines={1}>
-          {job?.job_title}
+        <Text style={styles.siswaName} numberOfLines={1}>
+          {siswa?.peserta?.nama}
         </Text>
 
-        <Text style={styles.jobType}>{job?.job_employment_type}</Text>
+        <Text style={styles.siswaNis}>No Register: {siswa?.nis}</Text>
+        <Text style={styles.siswaStatus(siswa)}>Status: {siswa?.status}</Text>
+
       </View>
     </TouchableOpacity>
   );

@@ -7,9 +7,10 @@ import { COLORS } from "../../../constants";
 import NearbyJobCard from "../../common/cards/nearby/NearbyJobCard";
 import useFetch from "../../../hook/useFetch";
 
-const Nearbyjobs = () => {
+const Nearbyjobs = ({
+  data, isLoading, error
+}) => {
   const router = useRouter();
-  const { data, isLoading, error } = useFetch("registrations",{});
   
   return (
     <View style={styles.container}>
@@ -26,10 +27,10 @@ const Nearbyjobs = () => {
         ) : error ? (
           <Text>Something went wrong</Text>
         ) : (
-          data?.map((job) => (
+          data?.map((job, index) => (
             <NearbyJobCard
               siswa={job}
-              key={`nearby-job-${job.job_id}`}
+              key={`nearby-job-${index}`}
               handleNavigate={() => router.push(`/register`)}
             />
           ))

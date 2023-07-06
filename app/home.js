@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { SafeAreaView, ScrollView, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { SafeAreaView, ScrollView, View, RefreshControl } from "react-native";
 import { Stack, useRouter } from "expo-router";
 
 import { COLORS, icons, images, SIZES } from "../constants";
@@ -9,10 +9,38 @@ import {
   ScreenHeaderBtn,
   Welcome,
 } from "../components";
+import useFetch from "../hook/useFetch";
 
 const Home = () => {
   const router = useRouter()
   const [searchTerm, setSearchTerm] = useState("");
+  const [refreshing, setRefreshing] = React.useState(false);
+  const { data, refetch, isLoading, error } = useFetch("registrations", {});
+
+  const [result, setResult] = useState([]);
+
+  const handleRefresh = () => {
+    refetch()
+  }
+
+  const handleSearch = () => {
+    if (searchTerm) {
+      // ** filter data
+      const filteredData = data.filter((item) =>
+        item.peserta?.nama?.toLowerCase().includes(searchTerm?.toLowerCase())
+      );
+
+      setResult(filteredData);
+    } else {
+      setResult(data);
+    }
+  }
+
+  console.log('data', data)
+
+  useEffect(() => {
+    handleSearch()
+  }, [searchTerm, data]);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
@@ -30,7 +58,15 @@ const Home = () => {
         }}
       />
 
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={handleRefresh}
+          />
+        }
+      >
         <View
           style={{
             flex: 1,
@@ -48,7 +84,7 @@ const Home = () => {
           />
 
           {/* <Popularjobs /> */}
-          <Nearbyjobs />
+          <Nearbyjobs data={searchTerm ? result : data} isLoading={isLoading} error={error} />
         </View>
       </ScrollView>
     </SafeAreaView>

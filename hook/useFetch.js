@@ -8,7 +8,7 @@ const useFetch = (endpoint, query) => {
 
   const options = {
     method: "GET",
-    url: `http://192.168.1.17:81/ppdb-v4/public/api/${endpoint}`,
+    url: `http://192.168.1.15:81/ppdb-v4/public/api/${endpoint}`,
     // headers: {
     //   "X-RapidAPI-Key": '4e4d41f674msha7f0eb382392ffap1027dfjsn216adbe64ee5',
     //   "X-RapidAPI-Host": "jsearch.p.rapidapi.com",

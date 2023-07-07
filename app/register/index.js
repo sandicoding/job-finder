@@ -22,8 +22,17 @@ const data = [
 const Register = () => {
     const router = useRouter();
     const [selected, setSelected] = React.useState({
+        nama: '',
+        tempatLahir: '',
+        tanggalLahir: '',
+        alamat: '',
+        noHp: '',
         agama: '',
-        jenisKelamin: ''
+        jenisKelamin: '',
+        pekerjaanAyah: '',
+        penghasilanAyah: '',
+        pekerjaanIbu: '',
+        penghasilanIbu: '',
     });
     const [date, setDate] = useState(new Date())
     const [open, setOpen] = useState(false)
@@ -51,6 +60,24 @@ const Register = () => {
         })
     }
 
+    const mappingToSelectListPekerjaan = (data) => {
+        return data?.map((item) => {
+            return {
+                key: item?.id,
+                value: item?.nama_pekerjaan
+            }
+        })
+    }
+
+    const mappingToSelectListPenghasilan = (data) => {
+        return data?.map((item) => {
+            return {
+                key: item?.id,
+                value: item?.penghasilan_ortu
+            }
+        })
+    }
+
     const findValueSelectListAgama = (data, value) => {
         const result = data?.find((item) => item?.nama_agama === value)
         return result
@@ -58,6 +85,16 @@ const Register = () => {
 
     const findValueSelectListJenisKelamin = (data, value) => {
         const result = data?.find((item) => item?.jenis_kelamin === value)
+        return result
+    }
+
+    const findValueSelectListPekerjaan = (data, value) => {
+        const result = data?.find((item) => item?.nama_pekerjaan === value)
+        return result
+    }
+
+    const findValueSelectListPenghasilan = (data, value) => {
+        const result = data?.find((item) => item?.penghasilan_ortu === value)
         return result
     }
 
@@ -69,7 +106,23 @@ const Register = () => {
         setSelected(val => ({ ...val, jenisKelamin: findValueSelectListJenisKelamin(data?.jenkel, value)?.id }));
     };
 
-    console.log(selected)
+    const handleSelectPekerjaan = (value, type) => {
+        if (type === 'ayah') {
+            setSelected(val => ({ ...val, pekerjaanAyah: findValueSelectListPekerjaan(data?.hasil_ortu, value)?.id }));
+        } else {
+            setSelected(val => ({ ...val, pekerjaanIbu: findValueSelectListPekerjaan(data?.hasil_ortu, value)?.id }));
+        }
+    };
+
+    const handleSelectPenghasilan = (value, type) => {
+        if (type === 'ayah') {
+            setSelected(val => ({ ...val, penghasilanAyah: findValueSelectListPenghasilan(data?.hasil_ortu, value)?.id }));
+        } else {
+            setSelected(val => ({ ...val, penghasilanIbu: findValueSelectListPenghasilan(data?.hasil_ortu, value)?.id }));
+        }
+    };
+
+    console.log(data)
 
     const onChange = (event, selectedDate) => {
         const currentDate = selectedDate || date;
@@ -190,6 +243,38 @@ const Register = () => {
                         <Text style={styles.infoText}>Biodata Orang Tua</Text>
                     </View>
 
+                    <View style={styles.inputContainter}>
+                        <Text style={styles.labelInput}>Nama Orang Tua ayah</Text>
+                        <View style={styles.wrapper}>
+                            <TextInput
+                                style={styles.input}
+                                // onChangeText={(text) => setSearchTerm(text)}
+                                placeholder='Nama Orang Tua ayah'
+                            />
+                        </View>
+                    </View>
+
+                    <View style={styles.inputContainter}>
+                        <Text style={styles.labelInput}>Pekerjaan Orang Tua ayah</Text>
+                        <SelectList
+                            setSelected={(val) => handleSelectPekerjaan(val, 'ayah')}
+                            data={mappingToSelectListPekerjaan(data?.pekerjaan_ortu)}
+                            boxStyles={{ backgroundColor: COLORS.white, borderColor: COLORS.white, borderRadius: SIZES.xSmall, }}
+                            save="value"
+                            placeholder="Pilih Pekerjaan"
+                        />
+                    </View>
+                    
+                    <View style={styles.inputContainter}>
+                        <Text style={styles.labelInput}>Penghasilan Orang Tua ayah</Text>
+                        <SelectList
+                            setSelected={(val) => handleSelectPenghasilan(val, 'ayah')}
+                            data={mappingToSelectListPenghasilan(data?.hasil_ortu)}
+                            boxStyles={{ backgroundColor: COLORS.white, borderColor: COLORS.white, borderRadius: SIZES.xSmall, }}
+                            save="value"
+                            placeholder="Pilih Penghasilan"
+                        />
+                    </View>
                 </View>
             </ScrollView>
         </SafeAreaView >
